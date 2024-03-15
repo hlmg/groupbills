@@ -2,6 +2,8 @@ package com.groupbills.repository;
 
 import com.groupbills.model.Member;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -34,5 +36,11 @@ public class MemberRepository {
                 .name(rs.getString("name"))
                 .password(rs.getString("password"))
                 .build());
+    }
+
+    public Optional<Member> findByLoginId(String loginId) {
+        String sql = "select * from member where login_id = :loginId";
+        List<Member> result = template.query(sql, Map.of("loginId", loginId), memberRowMapper());
+        return result.stream().findAny();
     }
 }

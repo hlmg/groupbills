@@ -10,3 +10,16 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8080/members
+
+###
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "loginId": "member1",
+  "password": "1234"
+}
+
+###
+POST http://localhost:8080/logout
+Content-Type: application/json
